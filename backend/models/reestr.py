@@ -41,7 +41,7 @@ class RiskCategory(Base):
 class RiskCode(Base):
     __tablename__ = 'risk_code'
     risk_code_id = Column(String(50), primary_key=True)
-    risk_code_full_name = Column(String(100)),
+    risk_code_full_name = Column(String(100))
     description = Column(String(1000))
 
     reestr = relationship('Reestr', back_populates='risk_code')

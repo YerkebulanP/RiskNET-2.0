@@ -1,18 +1,41 @@
-from config.database import conn, meta, engine
+from config.database import conn, engine
 from sqlalchemy import Column, Integer, String, ForeignKey, Text, Boolean, Table
+from sqlalchemy.orm import declarative_base, relationship
 
-users = Table ('users', meta, 
-    Column('id', Integer, primary_key = True),
-    Column('username',String(40), unique = False, nullable = True),
-    Column('email', String(40), unique = False, nullable = True),
-    Column('password', String(256), nullable = False),
-    Column('job_title', String(30), nullable = False)
-)
 
-# position_m = Table('position', meta,
-#     Column('position_id', Integer, primary_key= True, autoincrement= True),
-#     Column('position_name', String(100))    
+Base = declarative_base()
+
+
+class Users(Base):
+    __tablename__ = 'users' 
+    id = Column(Integer, primary_key = True)
+    username = Column(String(40), unique = False, nullable = True)
+    email = Column(String(40), unique = False, nullable = True)
+    password = Column(String(256), nullable = False)
+    job_title = Column(String(30), nullable = False)
+    position_id = Column(Integer, ForeignKey('position.position_id'), nullable=False)
+
+    position = relationship('Positions', back_populates='users', cascade="all")
+
+
+class Positions(Base):
+    __tablename__  = 'position'
+    position_id = Column(Integer, primary_key= True)
+    position_name = Column(String(100))   
+
+    users = relationship('Users', back_populates='position', cascade="all")
+
+
+Base.metadata.create_all(engine)
+
+
+
+# users = Table ('users', meta, 
+#     Column('id', Integer, primary_key = True),
+#     Column('username',String(40), unique = False, nullable = True),
+#     Column('email', String(40), unique = False, nullable = True),
+#     Column('password', String(256), nullable = False),
+#     Column('job_title', String(30), nullable = False),
+#     Column('position', String(50))
 # )
-
-meta.create_all(engine)
 

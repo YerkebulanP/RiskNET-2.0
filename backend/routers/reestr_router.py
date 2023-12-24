@@ -132,13 +132,14 @@ async def create_Reestr(risk_category_name: str,
                 effectivity_id=effectivity_id,
                 parent_id=reestr.parent_id
             ))
+            print(risk_category_id)
+
 
             return {'message': 'Reestr record created successfully'}
 
     except Exception as e:
         traceback.print_exc()
         return {'detail': f"IntegrityError: {e}", 'message': 'Failed to create Reestr record'}
-
 # @reestr_routers.put('/reestr/{reestr_id}', tags=['reestr'])
 # async def update_Reestr(reestr: Reestr_s, reestr_id: int):
 #     conn.execute(reestr_m.update().values(reestr_id = reestr.reestr_id, 
