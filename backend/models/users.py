@@ -9,5 +9,10 @@ users = Table ('users', meta,
     Column('job_title', String(30), nullable = False)
 )
 
+# position_m = Table('position', meta,
+#     Column('position_id', Integer, primary_key= True, autoincrement= True),
+#     Column('position_name', String(100))    
+# )
+
 meta.create_all(engine)
 

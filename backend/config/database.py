@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 engine = create_engine(
-        "postgresql://postgres:erkebulan2001@localhost:5432/ktzh", 
+        "postgresql://postgres:erkebulan2001@localhost:5432/risks", 
         echo = True
 )
 
