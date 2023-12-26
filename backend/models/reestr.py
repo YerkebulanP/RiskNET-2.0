@@ -46,7 +46,7 @@ class RiskCode(Base):
 
     reestr = relationship('Reestr', back_populates='risk_code')
     risk_category = relationship('RiskCategory', back_populates='risk_code')
-
+    risk_category_code = relationship('RiskCategoryCode', back_populates='risk_code')
 
 RiskCategoryCode = Table('risk_category_code', Base.metadata,
     Column('risk_category_id', Integer, ForeignKey('risk_category.risk_category_id')),

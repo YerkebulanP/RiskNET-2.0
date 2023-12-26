@@ -20,17 +20,17 @@
     <v-data-table
        class="table"
       :headers="headers"
-      :items="desserts"
+      :items="users"
       :search="search"
       :rows-per-page-items="[5, 10, 20, 50, 100, 200, 1000]">
 
       
       <template slot="items" slot-scope="props">
-        <td>{{ props.item.name }}</td>
-        <td>{{ props.item.calories }}</td>
-        <td>{{ props.item.fat }}</td>
-        <td>{{ props.item.carbs }}</td>
-        <td>{{ props.item.protein }}</td>
+        <td>{{ props.item.username }}</td>
+        <td>{{ props.item.lastname }}</td>
+        <td>{{ props.item.email }}</td>
+        <td>{{ props.item.password }}</td>
+        <td>{{ props.item.position }}</td>
         <td>
           <v-layout row>
             <v-btn small icon @click="editItem(props.item)"><v-icon>mdi-pencil</v-icon></v-btn>
@@ -47,11 +47,11 @@
           </v-card-title>
             
           <v-card-text>
-            <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
-            <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
-            <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
-            <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
-            <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
+            <v-text-field v-model="editedItem.username" label="Dessert name"></v-text-field>
+            <v-text-field v-model="editedItem.lastname" label="Calories"></v-text-field>
+            <v-text-field v-model="editedItem.email" label="Fat (g)"></v-text-field>
+            <v-text-field v-model="editedItem.password" label="Carbs (g)"></v-text-field>
+            <v-text-field v-model="editedItem.position" label="Protein (g)"></v-text-field>
           </v-card-text>
 
           <v-card-actions>
@@ -90,86 +90,15 @@
             sortable: true,
             text: 'Dessert (100g serving)',
           },
-          { value: 'calories', text: 'Calories' },
-          { value: 'fat', text: 'Fat (g)' },
-          { value: 'carbs', text: 'Carbs (g)' },
-          { value: 'protein', text: 'Protein (g)' },
-          { value: 'actions', text: 'Actions', sortable: false },
+          { value: 'username', text: 'Username' },
+          { value: 'lastname', text: 'Lastname'},
+          { value: 'email', text: 'Email' },
+          { value: 'password', text: 'Password' },
+          { value: 'position', text: 'Job title', sortable: false },
 
         ],
 
-      desserts: [
-              {
-                name: 'Frozen Yogurt',
-                calories: 159,
-                fat: 6.0,
-                carbs: 24,
-                protein: 4.0,
-              },
-              {
-                name: 'Ice cream sandwich',
-                calories: 237,
-                fat: 9.0,
-                carbs: 37,
-                protein: 4.3,
-              },
-              {
-                name: 'Eclair',
-                calories: 262,
-                fat: 16.0,
-                carbs: 23,
-                protein: 6.0,
-              },
-              {
-                name: 'Cupcake',
-                calories: 305,
-                fat: 3.7,
-                carbs: 67,
-                protein: 4.3,
-              },
-              {
-                name: 'Gingerbread',
-                calories: 356,
-                fat: 16.0,
-                carbs: 49,
-                protein: 3.9,
-              },
-              {
-                name: 'Jelly bean',
-                calories: 375,
-                fat: 0.0,
-                carbs: 94,
-                protein: 0.0,
-              },
-              {
-                name: 'Lollipop',
-                calories: 392,
-                fat: 0.2,
-                carbs: 98,
-                protein: 0,
-              },
-              {
-                name: 'Honeycomb',
-                calories: 408,
-                fat: 3.2,
-                carbs: 87,
-                protein: 6.5,
-              },
-              {
-                name: 'Donut',
-                calories: 452,
-                fat: 25.0,
-                carbs: 51,
-                protein: 4.9,
-              },
-              {
-                name: 'KitKat',
-                calories: 518,
-                fat: 26.0,
-                carbs: 65,
-                protein: 7,
-              },
-      ],
+      desserts: [],
       editedIndex: -1,
       editedItem: {
         name: '',
@@ -188,9 +117,19 @@
     }),
 
     computed: {
+      users() {
+        return this.$store.state.users.data;
+      },
+
       formTitle() {
         return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
       },
+    },
+    
+    async fetch() {
+      this.$store.commit(
+        "users/storeData", (await this.$axios.get("http://localhost:8000")).data
+      )
     },
 
     watch: {

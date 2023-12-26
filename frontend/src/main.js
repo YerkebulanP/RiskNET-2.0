@@ -14,9 +14,9 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import './styles/global.css';
 
 import axios from 'axios'
-import VueAxios from 'vue-axios'
+// import VueAxios from 'vue-axios'
 
-Vue.use(VueAxios, axios);
+Vue.prototype.$axios = axios;
 
 import VueChartkick from 'vue-chartkick';
 import Chart from 'chart.js';
@@ -49,8 +49,8 @@ new Vue({
   template: '<App/>',
   data: {
     themeColor: '#1D2939',
-    userEmail: 'admin@railways.kz',
-    userPassword: '123456'
+    // userEmail: 'admin@railways.kz',
+    // userPassword: '123456'
   },
 
   methods: {

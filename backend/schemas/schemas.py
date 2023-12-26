@@ -1,26 +1,22 @@
 from pydantic import BaseModel
 
-class Position(BaseModel):
-    position_id: int
-    position_name: str
-
 class UserBase(BaseModel):
     username: str
+    lastname: str
     email: str
     password: str
-    job_title: str
+    position: str
 
 class UserCreate(UserBase):
-    position_id: int
+    pass
 
 class User(UserBase):
     id: int
-    position: Position
 
     class Config:
         orm_mode = True
 
-        
+
 class Reestr_s(BaseModel):
     reestr_id: int
     risk_year: int

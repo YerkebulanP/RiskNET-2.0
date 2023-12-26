@@ -9,21 +9,23 @@ Base = declarative_base()
 class Users(Base):
     __tablename__ = 'users' 
     id = Column(Integer, primary_key = True)
-    username = Column(String(40), unique = False, nullable = True)
-    email = Column(String(40), unique = False, nullable = True)
+    username = Column(String(40), unique = False, nullable = False)
+    lastname = Column(String(40), unique = False, nullable = False)
+    email = Column(String(40), unique = False, nullable = False)
     password = Column(String(256), nullable = False)
-    job_title = Column(String(30), nullable = False)
-    position_id = Column(Integer, ForeignKey('position.position_id'), nullable=False)
+    position = Column(String(100))   
+ 
+#     position_id = Column(Integer, ForeignKey('position.position_id'), nullable=False)
 
-    position = relationship('Positions', back_populates='users', cascade="all")
+#     position = relationship('Positions', back_populates='users', cascade="all")
 
 
-class Positions(Base):
-    __tablename__  = 'position'
-    position_id = Column(Integer, primary_key= True)
-    position_name = Column(String(100))   
+# class Positions(Base):
+#     __tablename__  = 'position'
+#     position_id = Column(Integer, primary_key= True)
+#     position_name = Column(String(100))   
 
-    users = relationship('Users', back_populates='position', cascade="all")
+#     users = relationship('Users', back_populates='position', cascade="all")
 
 
 Base.metadata.create_all(engine)

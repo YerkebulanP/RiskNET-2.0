@@ -168,40 +168,40 @@ export default {
     }
   },
   methods: {
-    // toggleNavigationBar() {
-    //   const vm = this;
-
-    //   vm.$emit('toggleNavigationBar');
-    // },
-
-    setUpSettings() {
+    toggleNavigationBar() {
       const vm = this;
 
-      if (vm.userEmail === null || vm.password === null || vm.passwordConfirm === null) {
+      vm.$emit('toggleNavigationBar');
+    }
 
-        vm.result = "Электронный адрес и пароль не могут быть пустыми.";
-        vm.showResult = true;
+    // setUpSettings() {
+    //   const vm = this;
 
-        return;
-      }
+    //   if (vm.userEmail === null || vm.password === null || vm.passwordConfirm === null) {
 
-      if (vm.password !== vm.passwordConfirm) {
+    //     vm.result = "Электронный адрес и пароль не могут быть пустыми.";
+    //     vm.showResult = true;
 
-        vm.error = true;
-        vm.result = "Пароли не совпадают.";
-        vm.showResult = true;
+    //     return;
+    //   }
 
-        return;
-      }
+    //   if (vm.password !== vm.passwordConfirm) {
 
-      vm.$root.userEmail = vm.userEmail;
-      vm.$root.userPassword = vm.password;
+    //     vm.error = true;
+    //     vm.result = "Пароли не совпадают.";
+    //     vm.showResult = true;
 
-      vm.result = "Электронный адрес и пароль были изменены";
-      vm.showResult = true;
+    //     return;
+    //   }
 
-      vm.dialogSettings = false;
-    },
+    //   vm.$root.userEmail = vm.userEmail;
+    //   vm.$root.userPassword = vm.password;
+
+    //   vm.result = "Электронный адрес и пароль были изменены";
+    //   vm.showResult = true;
+
+    //   vm.dialogSettings = false;
+    // },
 
     // selectLanguage(code) {
     //   const vm = this;

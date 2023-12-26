@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from config.database import conn
 from models.reestr import Reestr, RiskCategory, RiskCode, Priority, Kri, Effectivity, Swot, Quarter
 from schemas.schemas import Reestr_s
+from sqlalchemy import select
 
 from fastapi import HTTPException
 import traceback
@@ -57,7 +58,7 @@ async def get_effectivity_id(quarter_value: int):
 
 @reestr_routers.get('/reestr', tags=['reestr'])
 async def fetch_all_Reestr():
-    return conn.execute(Reestr.select()).fetchall()
+    return conn.execute(select(Reestr)).fetchall()
 
 # @reestr_routers.post('/reestr', tags=['reestr'])
 # async def create_Reestr(reestr: Reestr_s):
@@ -94,7 +95,6 @@ async def create_Reestr(risk_category_name: str,
         and 'effectivity_id' in effectivity_id_response and 'swot_id' in swot_id_response and 'quarter_id' in quarter_id_response:
 
             risk_category_id = risk_category_id_response['risk_category_id']
-            print(risk_category_id)
             risk_code_id = risk_code_id_response['risk_code_id']
             priority_id = priority_id_response['priority_id']
             kri_id = kri_id_response['kri_id']

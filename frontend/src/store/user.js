@@ -1,9 +1,10 @@
 export const state = () => ({
     id:0,
     username:"",
+    lastname:"",
     email:"",
     password:"",
-    job_title:""
+    position:""
 })
 
 export const mutations = {
@@ -13,13 +14,16 @@ export const mutations = {
     storeUsername: (state, data) => {
         state.username = data
     },
+    storeLastname: (state, data) => {
+        state.lastname = data
+    },
     storeEmail: (state, data) => {
         state.email = data
     },
     storePassword: (state, data) => {
         state.password = data
     },
-    storeJob_title: (state, data) => {
-        state.job_title = data
+    storePosition: (state, data) => {
+        state.position = data
     }
 }
